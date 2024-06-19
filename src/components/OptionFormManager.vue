@@ -1,8 +1,13 @@
 <template>
   <div class="options">
-    <OptionForm v-for="(option, index) in localOptionsData" :key="index" :option="option"
-      :removeOption="() => removeOption(index)" @update-option="updateOption(index, $event)" />
-    <button @click="addOption" :disabled="localOptionsData.length >= 4">Add Option</button>
+    <OptionForm
+      v-for="(option, index) in localOptionsData"
+      :key="index"
+      :option="option"
+      :removeOption="() => removeOption(index)"
+      @update-option="updateOption(index, $event)"
+    />
+    <button @click="addOption" :disabled="localOptionsData.length >= 4" class="add-button">Add Option</button>
   </div>
 </template>
 
@@ -65,5 +70,20 @@ export default {
 <style scoped>
 .options {
   margin-bottom: 20px;
+}
+.add-button {
+  padding: 5px 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.add-button:hover {
+  background-color: #2980b9;
+}
+.add-button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
 }
 </style>

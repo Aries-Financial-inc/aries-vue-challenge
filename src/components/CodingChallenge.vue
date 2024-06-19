@@ -2,7 +2,7 @@
   <div>
     <h1>Options Profit Calculator</h1>
     <OptionFormManager :optionsData="localOptionsData" @update-options="updateOptionsData" />
-    <button @click="calculateRiskReward">Analyze</button>
+    <button @click="calculateRiskReward" class="analyze-button">Analyze</button>
     <ChartDisplay :chartData="chartData" :chartOptions="chartOptions" :maxProfit="maxProfit" :maxLoss="maxLoss"
       :breakevenPoints="breakevenPoints" />
   </div>
@@ -91,7 +91,7 @@ export default {
 
       // Calculate breakeven points
       this.breakevenPoints = priceRange.filter((price, index) => {
-        return (profitLoss[index - 1] < 0 && profitLoss[index] > 0) || (profitLoss[index - 1] > 0 && profitLoss[index] < 0)
+        return (profitLoss[index - 1] < 0 && profitLoss[index] > 0) || (profitLoss[index - 1] > 0 && profitLoss[index] < 0);
       });
 
       this.chartData = {
@@ -118,7 +118,16 @@ export default {
 </script>
 
 <style scoped>
-.summary {
-  margin-top: 20px;
+.analyze-button {
+  padding: 10px 20px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.analyze-button:hover {
+  background-color: #27ae60;
 }
 </style>
