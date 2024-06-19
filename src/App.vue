@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CodingChallenge from './components/CodingChallenge.vue'
+import CodingChallenge from './components/CodingChallenge.vue';
 
 export default {
   name: 'App',
