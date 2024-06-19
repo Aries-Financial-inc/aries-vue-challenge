@@ -7,11 +7,10 @@
           Option {{ index + 1 }}:
           <input v-model="option.type" placeholder="Type (call/put)" />
           <input v-model.number="option.strike_price" placeholder="Strike Price" />
-          <input v-model.number="option.bid" placeholder="Option Price" />
+          <input v-model.number="option.ask" placeholder="Option Price" />
         </label>
         <button @click="calculateRiskReward">Calculate</button>
       </div>
-
       <div class="dashboard">
         <div class="cards-group" v-if="result">
           <div class="card">
@@ -28,7 +27,6 @@
             <div v-else>{{ result.breakEvenPoints.join(", ") }}</div>
           </div>
         </div>
-
         <canvas ref="riskRewardChart"></canvas>
       </div>
     </div>
@@ -46,10 +44,6 @@ export default {
   data() {
     return {
       options: [
-        // { type: "call", strike: 100, price: 12.04 },
-        // { type: "call", strike: 102.5, price: 14 },
-        // { type: "put", strike: 103, price: 15.5 },
-        // { type: "call", strike: 105, price: 18 },
         {
           "strike_price": 100,
           "type": "Call",
@@ -82,7 +76,6 @@ export default {
           "long_short": "long",
           "expiration_date": "2025-12-17T00:00:00Z"
         }
-
       ],
       result: null,
       chart: null,
@@ -142,17 +135,30 @@ export default {
       const maxPrice = Math.max(...this.options.map((opt) => opt.strike_price)) * 1.5;
 
       for (let i = 0; i <= steps; i++) {
-        const underlyingPrice = (minPrice + (maxPrice - minPrice) * (i / steps)).toFixed(2);
-        underlyingPrices.push(underlyingPrice);
+        const underlyingPrice = (minPrice + (maxPrice - minPrice) * (i / steps));
+        underlyingPrices.push(underlyingPrice.toFixed(2));
 
         let totalProfitLoss = 0;
         for (const option of this.options) {
+          const cost = (option.bid + option.ask) / 2;
+
           if (option.type.toLowerCase() === "call") {
-            totalProfitLoss +=
-              Math.max(underlyingPrice - option.strike_price, 0) - option.bid;
+            if (option.long_short === 'long') {
+              totalProfitLoss +=
+                Math.max(underlyingPrice - option.strike_price, 0) - cost;
+            } else {
+              totalProfitLoss += cost -
+                Math.max(underlyingPrice - option.strike_price, 0);
+            }
+
           } else if (option.type.toLowerCase() === "put") {
-            totalProfitLoss +=
-              Math.max(option.strike_price - underlyingPrice, 0) - option.bid;
+            if (option.long_short == 'short') {
+              totalProfitLoss +=
+                Math.max(option.strike_price - underlyingPrice, 0) - cost;
+            } else {
+              totalProfitLoss += cost -
+                Math.max(option.strike_price - underlyingPrice, 0);
+            }
           }
         }
 
@@ -161,8 +167,9 @@ export default {
 
       const maxProfit = Math.max(...profitLosses);
       const maxLoss = Math.min(...profitLosses);
+
       const breakEvenPoints = underlyingPrices.filter(
-        (price, idx) => profitLosses[idx] === 0
+        (price, idx) => profitLosses[idx] == 0
       );
 
       return {
@@ -197,6 +204,7 @@ button {
 button:hover {
   background-color: rgb(10, 160, 230);
 }
+
 .calculator {
   display: flex;
   margin: 0 auto;
@@ -217,6 +225,7 @@ button:hover {
     width: 60px;
   }
 }
+
 @media screen and (max-width: 768px) {
   .options-input input {
     width: 100%;
@@ -232,7 +241,7 @@ button:hover {
 }
 
 .card {
-  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.1);
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin: 15px;
   flex: 1;
