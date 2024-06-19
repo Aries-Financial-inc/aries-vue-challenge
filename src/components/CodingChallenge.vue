@@ -1,22 +1,35 @@
 <template>
   <div>
     <h1>Options Profit Calculator</h1>
-    <div>
-      <h2>Options Risk & Reward Graph</h2>
-      <div>
+    <div class="calculator">
+      <div class="options-input">
         <label v-for="(option, index) in options" :key="index">
           Option {{ index + 1 }}:
           <input v-model="option.type" placeholder="Type (call/put)" />
-          <input v-model.number="option.strike" placeholder="Strike Price" />
-          <input v-model.number="option.price" placeholder="Option Price" />
+          <input v-model.number="option.strike_price" placeholder="Strike Price" />
+          <input v-model.number="option.bid" placeholder="Option Price" />
         </label>
         <button @click="calculateRiskReward">Calculate</button>
       </div>
-      <canvas ref="riskRewardChart"></canvas>
-      <div v-if="result">
-        <p>Max Profit: {{ result.maxProfit }}</p>
-        <p>Max Loss: {{ result.maxLoss }}</p>
-        <p>Break Even Points: {{ result.breakEvenPoints.join(", ") }}</p>
+
+      <div class="dashboard">
+        <div class="cards-group" v-if="result">
+          <div class="card">
+            <h3>Max Profit</h3>
+            <div>{{ result.maxProfit }}</div>
+          </div>
+          <div class="card">
+            <h3>Max Loss</h3>
+            <div>{{ result.maxLoss }}</div>
+          </div>
+          <div class="card">
+            <h3>Break Even Points</h3>
+            <div v-if="result.breakEvenPoints.length == 0">None</div>
+            <div v-else>{{ result.breakEvenPoints.join(", ") }}</div>
+          </div>
+        </div>
+
+        <canvas ref="riskRewardChart"></canvas>
       </div>
     </div>
   </div>
@@ -33,10 +46,43 @@ export default {
   data() {
     return {
       options: [
-        { type: "call", strike: 100, price: 12.04 },
-        { type: "call", strike: 102.5, price: 14 },
-        { type: "put", strike: 103, price: 15.5 },
-        { type: "call", strike: 105, price: 18 },
+        // { type: "call", strike: 100, price: 12.04 },
+        // { type: "call", strike: 102.5, price: 14 },
+        // { type: "put", strike: 103, price: 15.5 },
+        // { type: "call", strike: 105, price: 18 },
+        {
+          "strike_price": 100,
+          "type": "Call",
+          "bid": 10.05,
+          "ask": 12.04,
+          "long_short": "long",
+          "expiration_date": "2025-12-17T00:00:00Z"
+        },
+        {
+          "strike_price": 102.50,
+          "type": "Call",
+          "bid": 12.10,
+          "ask": 14,
+          "long_short": "long",
+          "expiration_date": "2025-12-17T00:00:00Z"
+        },
+        {
+          "strike_price": 103,
+          "type": "Put",
+          "bid": 14,
+          "ask": 15.50,
+          "long_short": "short",
+          "expiration_date": "2025-12-17T00:00:00Z"
+        },
+        {
+          "strike_price": 105,
+          "type": "Put",
+          "bid": 16,
+          "ask": 18,
+          "long_short": "long",
+          "expiration_date": "2025-12-17T00:00:00Z"
+        }
+
       ],
       result: null,
       chart: null,
@@ -62,7 +108,7 @@ export default {
             {
               label: "Profit/Loss",
               data: data.y,
-              borderColor: "rgba(75, 192, 192, 1)",
+              borderColor: "rgba(10, 105, 233, 1)",
               borderWidth: 2,
               fill: false,
             },
@@ -92,8 +138,8 @@ export default {
       const underlyingPrices = [];
       const profitLosses = [];
 
-      const minPrice = Math.min(...this.options.map((opt) => opt.strike)) * 0.5;
-      const maxPrice = Math.max(...this.options.map((opt) => opt.strike)) * 1.5;
+      const minPrice = Math.min(...this.options.map((opt) => opt.strike_price)) * 0.5;
+      const maxPrice = Math.max(...this.options.map((opt) => opt.strike_price)) * 1.5;
 
       for (let i = 0; i <= steps; i++) {
         const underlyingPrice = (minPrice + (maxPrice - minPrice) * (i / steps)).toFixed(2);
@@ -103,10 +149,10 @@ export default {
         for (const option of this.options) {
           if (option.type.toLowerCase() === "call") {
             totalProfitLoss +=
-              Math.max(underlyingPrice - option.strike, 0) - option.price;
+              Math.max(underlyingPrice - option.strike_price, 0) - option.bid;
           } else if (option.type.toLowerCase() === "put") {
             totalProfitLoss +=
-              Math.max(option.strike - underlyingPrice, 0) - option.price;
+              Math.max(option.strike_price - underlyingPrice, 0) - option.bid;
           }
         }
 
@@ -134,5 +180,62 @@ export default {
 label {
   display: block;
   margin: 10px 0;
+}
+
+button {
+  background-color: rgb(14, 165, 233);
+  border: 1px solid rgb(14, 165, 233);
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  padding: 15px;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(10, 160, 230);
+}
+.calculator {
+  display: flex;
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
+.options-input {
+  flex: 1
+}
+
+.options-input input {
+  width: 80px;
+  padding: 5px;
+}
+
+@media screen and (max-width: 1400px) {
+  .options-input input {
+    width: 60px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .options-input input {
+    width: 100%;
+  }
+}
+
+.dashboard {
+  flex: 3
+}
+
+.cards-group {
+  display: flex;
+}
+
+.card {
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.1);
+  border-radius: 5px;
+  margin: 15px;
+  flex: 1;
+  padding-bottom: 30px;
 }
 </style>
