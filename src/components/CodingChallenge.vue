@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Options Profit Calculator</h1>
-    <div>
+    <div class="chart-wrapper">
       <LineChart :data="chartData" :options="options" />
     </div>
   </div>
@@ -105,4 +105,10 @@ export default {
 </script>
 
 <style scoped>
+.chart-wrapper {
+  max-height: calc(100vh - 150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
