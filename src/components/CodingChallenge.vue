@@ -1,22 +1,22 @@
 <template>
   <div>
     <h1>Options Profit Calculator</h1>
-    <line-chart :chartData="chartData" :options="chartOptions"></line-chart>
-    <div class="summary">
-      <p><strong>Max Profit:</strong> {{ maxProfit }}</p>
-      <p><strong>Max Loss:</strong> {{ maxLoss }}</p>
-      <p><strong>Breakeven Points:</strong> {{ displayBreakevenPoints }}</p>
-    </div>
+    <OptionFormManager :optionsData="localOptionsData" @update-options="updateOptionsData" />
+    <button @click="calculateRiskReward">Analyze</button>
+    <ChartDisplay :chartData="chartData" :chartOptions="chartOptions" :maxProfit="maxProfit" :maxLoss="maxLoss"
+      :breakevenPoints="breakevenPoints" />
   </div>
 </template>
 
 <script>
-import LineChart from './LineChart.vue';
+import OptionFormManager from './OptionFormManager.vue';
+import ChartDisplay from './ChartDisplay.vue';
 
 export default {
   name: 'CodingChallenge',
   components: {
-    LineChart
+    OptionFormManager,
+    ChartDisplay
   },
   props: {
     optionsData: {
@@ -26,6 +26,7 @@ export default {
   },
   data() {
     return {
+      localOptionsData: JSON.parse(JSON.stringify(this.optionsData)),
       maxProfit: null,
       maxLoss: null,
       breakevenPoints: [],
@@ -59,23 +60,14 @@ export default {
       }
     }
   },
-  computed: {
-    /**
-     * Formats the breakeven points for display.
-     * @returns {string} Comma-separated string of breakeven points or 'None'.
-     */
-    displayBreakevenPoints() {
-      return this.breakevenPoints.length > 0 ? this.breakevenPoints.join(', ') : 'None';
-    }
-  },
   methods: {
-    /**
-     * Calculates the risk and reward for the options strategy and updates chart data.
-     */
+    updateOptionsData(newOptionsData) {
+      this.localOptionsData = newOptionsData;
+    },
     calculateRiskReward() {
       const priceRange = Array.from({ length: 201 }, (_, i) => i + 50); // Prices from 50 to 250
       const profitLoss = priceRange.map(price => {
-        return this.optionsData.reduce((total, option) => {
+        return this.localOptionsData.reduce((total, option) => {
           const { strike_price, type, bid, ask, long_short } = option;
           const premium = (bid + ask) / 2;
           let payoff = 0;
@@ -99,7 +91,7 @@ export default {
 
       // Calculate breakeven points
       this.breakevenPoints = priceRange.filter((price, index) => {
-        return Math.abs(profitLoss[index]) < 0.01;
+        return (profitLoss[index - 1] < 0 && profitLoss[index] > 0) || (profitLoss[index - 1] > 0 && profitLoss[index] < 0)
       });
 
       this.chartData = {
@@ -114,8 +106,13 @@ export default {
       };
     }
   },
-  mounted() {
-    this.calculateRiskReward();
+  watch: {
+    optionsData: {
+      immediate: true,
+      handler(newVal) {
+        this.localOptionsData = JSON.parse(JSON.stringify(newVal));
+      }
+    }
   }
 }
 </script>
