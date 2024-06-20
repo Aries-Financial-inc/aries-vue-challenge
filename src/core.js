@@ -46,7 +46,6 @@ const calculateProfit = (price, strikePrice, bid, ask, type, longShort) => {
 export const getRiskRewardRatio = (profitLoss) => {
   const maxProfit = Math.max(...profitLoss);
   const maxLoss = Math.min(...profitLoss);
-
   const ratio = maxProfit / Math.abs(maxLoss);
   return {
     ratio: `1 : ${Math.floor(ratio)}`,
