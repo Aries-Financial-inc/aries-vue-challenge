@@ -5,27 +5,27 @@
       @click="selectStrategy"
     >
       <div>
-        <div class="mb-1">Strike Price</div>
+        <div >Strike Price</div>
         <div class="text-lg font-bold">
-          {{ option.strike_price | currency }}
-        </div>
+          {{ option.strike_price  }}  {{ currency }} 
+         </div>
       </div>
       <div>
         <div>Option Type</div>
         <div class="text-lg font-bold">
-          {{ option.type }}
+          {{ option.type }} 
         </div>
       </div>
       <div>
         <div>Bid Price</div>
         <div class="text-lg font-bold">
-          {{ option.bid | currency }}
+          {{ option.bid  }}  {{ currency }} 
         </div>
       </div>
       <div>
         <div>Ask Price</div>
         <div class="text-lg font-bold">
-          {{ option.ask | currency }}
+          {{ option.ask  }}  {{ currency }} 
         </div>
       </div>
       <div>
@@ -48,6 +48,12 @@
   
   export default {
     name: 'OptionStrategy',
+    data() {
+        return {
+            currency: 'USD'
+        }
+    },
+
     props: {
       option: {
         type: Object,

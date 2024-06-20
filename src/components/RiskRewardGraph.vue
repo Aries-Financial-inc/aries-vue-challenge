@@ -12,11 +12,11 @@
         </div>
         <div class="flex gap-4 text-2xl font-bold mb-2">
           <span>Max Profit:</span>
-          {{ maxProfit | currency }}
+          {{ maxProfit  }} {{ currency }}
         </div>
         <div class="flex gap-4 text-2xl font-bold mb-2">
           <span>Max Loss:</span>
-          {{ maxLoos | currency }}
+          {{ maxLoos  }} {{ currency }}
         </div>
         <div class="flex gap-4 text-2xl font-bold mb-2">
           <span>Profit Probability:</span>
@@ -49,6 +49,7 @@
     },
     data() {
       return {
+        currency: 'USD',
         chartData: {
           labels: [],
           datasets: [
