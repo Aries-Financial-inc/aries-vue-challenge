@@ -119,7 +119,6 @@
         immediate: true,
         handler(newOption) {
           const axiosData = generateChartData(newOption);
-          console.log(axiosData.y)
           const { ratio, maxLoss, maxProfit } = getRiskRewardRatio(axiosData.y);
           this.maxLoos = maxLoss;
           this.maxProfit = maxProfit;
