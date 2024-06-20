@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Options Profit Calculator Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Options Profit Calculator Documentation</h1>
+        </header>
+        <section>
+            <h2>Project Structure</h2>
+            <ul>
+                <li><strong>App.vue:</strong> The main component that includes the <code>CodingChallenge</code> component.</li>
+                <li><strong>components/CodingChallenge.vue:</strong> The component responsible for calculating and displaying the profit/loss data and the graph.</li>
+                <li><strong>components/LineChart.vue:</strong> A wrapper around Chart.js to render the graph.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Implementation Details</h2>
+            <h3>App.vue</h3>
+            <p><strong>Purpose:</strong> Serves as the main entry point of the application.</p>
+            <p><strong>Components Used:</strong> <code>CodingChallenge</code></p>
+            <p><strong>Data:</strong></p>
+            <ul>
+                <li><code>sampleData:</code> Array of sample options data to be passed to the <code>CodingChallenge</code> component.</li>
+            </ul>
+
+            <h3>CodingChallenge.vue</h3>
+            <p><strong>Purpose:</strong> Calculates risk and reward for options strategies and displays the results.</p>
+            <p><strong>Components Used:</strong> <code>LineChart</code></p>
+            <p><strong>Data:</strong></p>
+            <ul>
+                <li><code>chartData:</code> Data used for rendering the chart.</li>
+                <li><code>chartOptions:</code> Configuration options for the chart.</li>
+                <li><code>maxProfit:</code> Maximum profit calculated from the options data.</li>
+                <li><code>maxLoss:</code> Maximum loss calculated from the options data.</li>
+                <li><code>breakEvenPoints:</code> Array of break-even points calculated from the options data.</li>
+            </ul>
+            <p><strong>Methods:</strong></p>
+            <ul>
+                <li><code>calculateRiskReward()</code>: Method to calculate the risk and reward based on the options data.</li>
+            </ul>
+            <p><strong>Lifecycle Hooks:</strong></p>
+            <ul>
+                <li><code>mounted()</code>: Calls <code>calculateRiskReward()</code> to initialize the chart data.</li>
+            </ul>
+
+            <h3>LineChart.vue</h3>
+            <p><strong>Purpose:</strong> Wrapper component for rendering a line chart using Chart.js.</p>
+            <p><strong>Props:</strong></p>
+            <ul>
+                <li><code>chartData:</code> Data to be displayed on the chart.</li>
+                <li><code>chartOptions:</code> Configuration options for the chart.</li>
+            </ul>
+            <p><strong>Methods:</strong></p>
+            <ul>
+                <li><code>renderChart()</code>: Initializes and renders the chart using Chart.js.</li>
+            </ul>
+            <p><strong>Watchers:</strong></p>
+            <ul>
+                <li><code>chartData:</code> Re-renders the chart when the data changes.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Changes Made</h2>
+            <ul>
+                <li>Implemented the logic to calculate risk and reward for options strategies: This involved creating a method in <code>CodingChallenge.vue</code> that processes the input options data and computes the required values.</li>
+                <li>Integrated Chart.js to generate the risk and reward graph: The <code>LineChart.vue</code> component was created to wrap around Chart.js and handle the rendering of the graph.</li>
+                <li>Styled the application to display the maximum profit, maximum loss, and break-even points clearly: CSS styles were added to enhance the user interface and provide a better visual representation of the data.</li>
+                <li>Addressed the graph rendering issue: Ensured that the graph correctly displays upon loading the page without requiring any user interaction.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Future Improvements</h2>
+            <ul>
+                <li>Re-implementing the dark mode toggle with better UI/UX.</li>
+                <li>Adding more customizable options for the graph.</li>
+                <li>Improving the input validation and error handling.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>For any questions or suggestions, please contact me professional.aymen@gmail.com</p>
+        </footer>
+    </div>
+</body>
+</html>
