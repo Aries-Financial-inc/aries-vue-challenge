@@ -1,17 +1,27 @@
 <template>
   <div>
     <h1>Options Profit Calculator</h1>
-    {{ "Your Code Here" }}
+    
+    <ProfitLossChart 
+      v-for="(option, index) in optionsData" 
+      :key="index"
+      :option="option"
+    />
+
   </div>
 </template>
 
 <script>
+import ProfitLossChart from './ProfitLossChart.vue';
+
 export default {
-  name: 'CodingChallenge',
-  props: {
-    optionsData: Array
-  }
-  // Your code here
+    name: 'CodingChallenge',
+    props: {
+        optionsData: Array
+    }
+    // Your code here
+    ,
+    components: { ProfitLossChart },
 }
 </script>
 
