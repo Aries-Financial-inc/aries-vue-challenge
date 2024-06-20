@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <CodingChallenge :optionsData="sampleData" />
+    <notifications group="foo"  position="bottom right" />
   </div>
 </template>
 

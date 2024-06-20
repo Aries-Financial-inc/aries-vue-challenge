@@ -77,15 +77,31 @@
           };
           this.$emit('update:selectedOption', this.options.length - 1);
           this.$emit('updateOptions', this.options);
-
-        } 
-        
+          this.$notify({
+            group: 'foo',
+            title: 'Added',
+            text: 'Contract added successfully',
+            type: 'success',
+          });
+        } else {
+          this.$notify({
+            group: 'foo',
+            title: 'Error',
+            text: 'You can only add up to 4 contracts',
+            type: 'error',
+          });
+        }
       },
       removeOption(index) {
         this.options.splice(index, 1);
         this.$emit('update:selectedOption', Math.max(this.selectedOption - 1, 0));
         this.$emit('updateOptions', this.options);
-
+        this.$notify({
+            group: 'foo',
+            title: 'Warning',
+            text: 'Contract Removed Successfully',
+            type: 'warn',
+          });
       },
     },
     watch: {
