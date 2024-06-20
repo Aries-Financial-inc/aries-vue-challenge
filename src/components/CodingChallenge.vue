@@ -17,10 +17,17 @@
 import InputOptions from './InputOptions.vue';
 import RiskRewardGraph from './RiskRewardGraph.vue';
 import OptionsSummary from './OptionsSummary.vue';
+import { validateOptionsArray } from '@/validators';
 
 export default {
   components: { InputOptions, RiskRewardGraph, OptionsSummary },
-  props: ['optionsData'],
+  props: {
+    optionsData: {
+      type: Array,
+      required: true,
+      validator: validateOptionsArray
+    }
+  },
   data() {
     return {
       options: this.optionsData,
@@ -91,7 +98,7 @@ export default {
 </script>
 
 <style scoped>
-  .coding-challenge-wrapper {
-    margin: 0 60px;
-  }
+.coding-challenge-wrapper {
+  margin: 0 60px;
+}
 </style>

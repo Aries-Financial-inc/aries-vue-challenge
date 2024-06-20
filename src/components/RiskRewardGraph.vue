@@ -7,11 +7,22 @@
 
 <script>
 import { Chart, registerables } from 'chart.js';
+import { validateOptionsArray } from '@/validators';
 
 Chart.register(...registerables);
 
 export default {
-  props: ['options', 'showGraph'],
+  props: {
+    options: {
+      type: Array,
+      required: true,
+      validator: validateOptionsArray
+    },
+    showGraph: {
+      type: Boolean,
+      required: true
+    }
+  },
   watch: {
     options: {
       deep: true,

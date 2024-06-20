@@ -11,7 +11,27 @@
 
 <script>
 export default {
-  props: ['maxProfit', 'maxLoss', 'breakEvenPoints', 'showGraph']
+  props: {
+    maxProfit: {
+      type: Number,
+      required: true
+    },
+    maxLoss: {
+      type: Number,
+      required: true
+    },
+    breakEvenPoints: {
+      type: Array,
+      required: true,
+      validator(value) {
+        return value.every(point => typeof point === 'number');
+      }
+    },
+    showGraph: {
+      type: Boolean,
+      required: true
+    }
+  }
 };
 </script>
 

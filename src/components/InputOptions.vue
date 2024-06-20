@@ -12,8 +12,16 @@
 </template>
 
 <script>
+import { validateOptionsArray } from '@/validators';
+
 export default {
-  props: ['options'],
+  props: {
+    options: {
+      type: Array,
+      required: true,
+      validator: validateOptionsArray
+    }
+  },
   methods: {
     updateOptions() {
       this.$emit('update-options', this.options);
