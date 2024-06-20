@@ -1,3 +1,12 @@
+# Options Profit Calculator
+
+This project is a Vue.js application that generates a risk & reward graph for options strategies. The component accepts an input of up to four options contracts and outputs a risk & reward graph, along with max profit, max loss, and break-even points.
+
+## Features
+- Responsive and interactive line chart using Chart.js
+- Dark theme with Tailwind CSS
+- Display of max profit, max loss, and break-even points
+
 ## Objective
 
 Design and implement a front-end for options strategy risk and reward analysis using Vue.
