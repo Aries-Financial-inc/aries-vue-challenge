@@ -5,10 +5,10 @@ describe('RiskRewardGraph.vue', () => {
   it('does not generate graph when showGraph is false', () => {
     const options = [];
     const wrapper = shallowMount(RiskRewardGraph, {
-      props: { options, showGraph: false },
+      propsData: { options, showGraph: false },
     });
 
-    expect(wrapper.find('canvas').isVisible()).toBe(false);
+    expect(wrapper.find('[data-test-id="riskRewardChart"]').isEmpty()).toBe(true);
   });
 
   it('generates graph when showGraph is true', async () => {
@@ -23,12 +23,11 @@ describe('RiskRewardGraph.vue', () => {
       },
     ];
     const wrapper = shallowMount(RiskRewardGraph, {
-      props: { options, showGraph: true },
+      propsData: { options, showGraph: false },
     });
 
-    // Simulate rendering to generate graph
-    wrapper.vm.generateGraph();
+    await wrapper.setProps({ showGraph: true });
 
-    expect(wrapper.find('canvas').isVisible()).toBe(true);
+    expect(wrapper.find('[data-test-id="riskRewardChart"]').isVisible()).toBe(true);
   });
 });

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Risk & Reward Graph</h2>
-    <canvas id="riskRewardChart"></canvas>
+    <canvas data-test-id="riskRewardChart" ref="riskRewardCanvas"></canvas>
   </div>
 </template>
 
@@ -32,20 +32,19 @@ export default {
         }
       }
     },
-    showGraph(newValue) {
-      if (newValue) {
-        this.generateGraph();
-      }
-    }
+    showGraph: {
+      handler(newVal) {
+        if (newVal) {
+          this.generateGraph();
+        }
+      },
+      immediate: true,
+    },
   },
   methods: {
     generateGraph() {
-      const ctx = document.getElementById('riskRewardChart').getContext('2d');
+      const ctx = this.$refs.riskRewardCanvas.getContext('2d');
       const data = this.calculateRiskRewardData();
-
-      if (this.chart) {
-        this.chart.destroy();
-      }
 
       this.chart = new Chart(ctx, {
         type: 'line',
@@ -106,6 +105,11 @@ export default {
       }
 
       return { labels: prices, values: profits };
+    }
+  },
+  beforeDestroy() {
+    if (this.chart) {
+      this.chart.destroy();
     }
   }
 };

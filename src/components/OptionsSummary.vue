@@ -1,7 +1,7 @@
 <template>
   <div class="options-summary">
     <h2>Summary</h2>
-    <div v-if="showGraph">
+    <div data-test-id="summary-elements" v-if="showGraph">
       <p>Max Profit: {{ maxProfit }}</p>
       <p>Max Loss: {{ maxLoss }}</p>
       <p>Break-even Points: {{ breakEvenPoints.join(', ') }}</p>
@@ -13,11 +13,11 @@
 export default {
   props: {
     maxProfit: {
-      type: Number,
+      type: String,
       required: true
     },
     maxLoss: {
-      type: Number,
+      type: String,
       required: true
     },
     breakEvenPoints: {

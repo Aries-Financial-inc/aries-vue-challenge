@@ -18,9 +18,14 @@ import InputOptions from './InputOptions.vue';
 import RiskRewardGraph from './RiskRewardGraph.vue';
 import OptionsSummary from './OptionsSummary.vue';
 import { validateOptionsArray } from '@/validators';
+import { Row, Col } from 'element-ui';
 
 export default {
-  components: { InputOptions, RiskRewardGraph, OptionsSummary },
+  components: {
+    InputOptions, RiskRewardGraph, OptionsSummary,
+    'el-row': Row,
+    'el-col': Col
+  },
   props: {
     optionsData: {
       type: Array,
@@ -31,8 +36,8 @@ export default {
   data() {
     return {
       options: this.optionsData,
-      maxProfit: 0,
-      maxLoss: 0,
+      maxProfit: (0).toFixed(2),
+      maxLoss: (0).toFixed(2),
       breakEvenPoints: [],
       showGraph: false
     };

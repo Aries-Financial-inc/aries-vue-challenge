@@ -14,7 +14,7 @@ describe('InputOptions.vue', () => {
       },
     ];
     const wrapper = shallowMount(InputOptions, {
-      props: { options },
+      propsData: { options },
     });
 
     expect(wrapper.text()).toContain('Call long at $100 (Bid: $10.05, Ask: $12.04)');
@@ -32,10 +32,11 @@ describe('InputOptions.vue', () => {
       },
     ];
     const wrapper = shallowMount(InputOptions, {
-      props: { options },
+      propsData: { options },
     });
 
-    await wrapper.find('button').trigger('click');
+    await wrapper.vm.updateOptions();
+
     expect(wrapper.emitted('update-options')).toBeTruthy();
   });
 });

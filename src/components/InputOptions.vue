@@ -7,14 +7,18 @@
           option.ask }})
       </li>
     </ul>
-    <el-button type="primary" plain @click="updateOptions">Generate graph</el-button>
+    <el-button data-test-id="generate-button" type="primary" plain @click="updateOptions">Generate graph</el-button>
   </div>
 </template>
 
 <script>
 import { validateOptionsArray } from '@/validators';
+import { Button } from 'element-ui';
 
 export default {
+  components: {
+    'el-button': Button
+  },
   props: {
     options: {
       type: Array,
