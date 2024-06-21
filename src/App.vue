@@ -1,65 +1,54 @@
 <template>
   <div id="app">
-    <CodingChallenge :optionsData="sampleData"/>
+    <CodingChallenge :options-data="sampleData" />
   </div>
 </template>
 
 <script>
-import CodingChallenge from './components/CodingChallenge.vue'
+import CodingChallenge from "./components/CodingChallenge.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    CodingChallenge
+    CodingChallenge,
   },
   data() {
     return {
       sampleData: [
         {
-          "strike_price": 100, 
-          "type": "Call", 
-          "bid": 10.05, 
-          "ask": 12.04, 
-          "long_short": "long", 
-          "expiration_date": "2025-12-17T00:00:00Z"
+          "ask": 12.04,
+          "bid": 10.05,
+          "expiration_date": "2025-12-17T00:00:00Z",
+          "long_short": "long",
+          "strike_price": 100,
+          "type": "Call",
         },
         {
-          "strike_price": 102.50, 
-          "type": "Call", 
-          "bid": 12.10, 
-          "ask": 14, 
-          "long_short": "long", 
-          "expiration_date": "2025-12-17T00:00:00Z"
+          "ask": 14,
+          "bid": 12.10,
+          "expiration_date": "2025-12-17T00:00:00Z",
+          "long_short": "long",
+          "strike_price": 102.50,
+          "type": "Call",
         },
         {
-          "strike_price": 103, 
-          "type": "Put", 
-          "bid": 14, 
-          "ask": 15.50, 
-          "long_short": "short", 
-          "expiration_date": "2025-12-17T00:00:00Z"
+          "ask": 15.50,
+          "bid": 14,
+          "expiration_date": "2025-12-17T00:00:00Z",
+          "long_short": "short",
+          "strike_price": 103,
+          "type": "Put",
         },
         {
-          "strike_price": 105, 
-          "type": "Put", 
-          "bid": 16, 
-          "ask": 18, 
-          "long_short": "long", 
-          "expiration_date": "2025-12-17T00:00:00Z"
-        }
-      ]
-    }
-  }
-}
+          "ask": 18,
+          "bid": 16,
+          "expiration_date": "2025-12-17T00:00:00Z",
+          "long_short": "long",
+          "strike_price": 105,
+          "type": "Put",
+        },
+      ],
+    };
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
