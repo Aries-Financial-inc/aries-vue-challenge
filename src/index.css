@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 10px;
+}
+/*
+styles for date picker
+*/
+  .custom-datepicker {
+    border: 1px solid #E5E7EB; 
+  }
+  
+  .custom-datepicker .vdp-datepicker {
+    background-color: #fff;
+    margin-right: 500px !important;
+  }
+  
+  .custom-datepicker .vdp-datepicker__calendar {
+    left: -50%; 
+  }
+  .custom-datepicker input[type="text"] {
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    padding-left: 10px;
+    line-height: 1.5; 
+  }
+  .custom-datepicker .vdp-datepicker-header {
+    background-color: #f0f0f0; 
+  }
+
+  .custom-datepicker .vdp-datepicker-date--disabled {
+    color: #999; 
+  }
