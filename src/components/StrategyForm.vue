@@ -22,7 +22,7 @@
             <option value="Long" class="text-gray-900">Long</option>
             <option value="Short">Short</option>
           </select>
-          <datepicker v-model="newOption.expiration_date" placeholder="Select Date" :format="DatePickerFormat" class="custom-datepicker" :disabledDates="disabledDates"></datepicker>
+          <datepicker :required="true" v-model="newOption.expiration_date" placeholder="Select Date" :format="DatePickerFormat" class="custom-datepicker" :disabledDates="disabledDates"></datepicker>
         </div>
         <button type="submit" class="bg-blue-500 text-white p-2 rounded">Add Option</button>
       </form>
@@ -32,7 +32,7 @@
   <script>
   import OptionStrategy from '@/components/OptionStrategy.vue';
   import Datepicker from 'vuejs-datepicker';
-  
+  import moment from 'moment';
   export default {
     name: 'StrategyForm',
     components: {
@@ -55,7 +55,7 @@
           bid: 12,
           ask: 14,
           long_short: 'Long',
-          expiration_date: '',
+          expiration_date: moment('17-12-2025', 'DD-MM-YYYY').toDate(),
         },
         options: [...this.optionsData],
       };
@@ -65,6 +65,16 @@
         this.$emit('update:selectedOption', index);
       },
       addOption() {
+
+        if(this.newOption.expiration_date === '') {
+          this.$notify({
+            group: 'foo',
+            title: 'Date is required',
+            text: 'Please add expiration date',
+            type: 'error',
+          });
+          return 
+        }
         if (this.options.length < 4) {
           this.options.push({ ...this.newOption });
           this.newOption = {
