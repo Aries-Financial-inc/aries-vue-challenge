@@ -1,6 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
 import RiskRewardGraph from '@/components/RiskRewardGraph.vue';
-import '@testing-library/jest-dom';
 
 describe('RiskRewardGraph.vue', () => {
   it('does not generate graph when showGraph is false', () => {
