@@ -1,28 +1,46 @@
+# Options Strategy Risk and Reward Analysis
+Overview
+This project is a Vue.js component that generates a risk and reward graph for options strategies. It accepts input for up to four options contracts in JSON format and outputs the following:
+
+Risk and reward graph where the X-axis is the price of the underlying at the time of expiry and the Y-axis is the profit/loss at that price.
+Maximum profit, maximum loss, and all break-even points.
+
+# Installation
+Clone the repository:
+
+Navigate to the project directory:
 
 
-## Objective
+Install dependencies:
 
-Design and implement a front-end for options strategy risk and reward analysis using Vue.
 
-## Brief
+npm install
+Usage
+Start the development server:
 
-Your challenge is to create a Vue component that can generate a risk & reward graph for options strategies. The component should accept an input of up to four options contracts and output the following:
-1. A risk & reward graph where X is the price of the underlying at the time of expiry and Y is the profit/loss at that price. 
-2. Max profit, max loss, and all break even points.
 
-### Evaluation Criteria
+npm run serve
+Open your browser and navigate to http://localhost:8080 to view the application.
 
-- Completeness of the logic
-- Usability of the graph
-- Aesthetics of the UI
-- Readability and code structure
+Enter up to four options contracts in JSON format in the textarea and click the "Calculate" button to generate the risk and reward graph.
 
-### CodeSubmit 
+# Example JSON Input
 
-Please organize, design, test, and document your code as if it were
-going into production - then push your changes to the main branch.
+[
+  {
+    "type": "call",
+    "strike": 100,
+    "price": 5
+  },
+  {
+    "type": "put",
+    "strike": 110,
+    "price": 3
+  }
+]
+# Dependencies
+Vue.js
+Chart.js
 
-Reply to the invitation e-mail with your github username to notify of completion.
-
-Have fun coding! 🚀
-The Aries Financial Team
+# License
+This project is licensed under the MIT License - see the LICENSE file for details.#
