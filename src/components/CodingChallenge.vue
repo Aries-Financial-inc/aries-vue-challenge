@@ -1,20 +1,35 @@
 <template>
   <div>
     <h1>Options Profit Calculator</h1>
-    {{ "Your Code Here" }}
+    <div class="d-flex justify-content-center">
+      <risk-reward-chart :options="optionsData"/>
+    </div>
+    <options-table :options="optionsData" />
   </div>
 </template>
 
 <script>
+import RiskRewardChart from "./RiskRewardChart"
+import OptionsTable from './OptionsTable.vue'
+
 export default {
   name: 'CodingChallenge',
   props: {
     optionsData: Array
+  },
+  components: {
+    RiskRewardChart,
+    OptionsTable,
   }
-  // Your code here
 }
 </script>
 
 <style scoped>
-/* Your Code Here */
+.d-flex{
+  display: flex;
+}
+
+.justify-content-center{
+  justify-content: center;
+}
 </style>
