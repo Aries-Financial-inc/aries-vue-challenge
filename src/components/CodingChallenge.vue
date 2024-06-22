@@ -4,11 +4,14 @@
     <div class="d-flex justify-content-center">
       <risk-reward-chart :options="optionsData"/>
     </div>
+    <options-table :options="optionsData" />
   </div>
 </template>
 
 <script>
 import RiskRewardChart from "./RiskRewardChart"
+import OptionsTable from './OptionsTable.vue'
+
 export default {
   name: 'CodingChallenge',
   props: {
@@ -16,6 +19,7 @@ export default {
   },
   components: {
     RiskRewardChart,
+    OptionsTable,
   }
 }
 </script>

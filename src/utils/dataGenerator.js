@@ -65,3 +65,41 @@ const getRandomColor = () => {
   }
   return color;
 };
+
+// Calculate Individual Option Summary (Max Profit and Loss, Breakevent points)
+export const calculateOptionMetrics = (option) => {
+  const strikePrice = option.strike_price;
+  const optionType = option.type;
+  const longShort = option.long_short;
+  const premium = calculatePremium(option.bid, option.ask);
+
+  let maxProfit, maxLoss, breakeven;
+
+  if (optionType === "Call") {
+    if (longShort === "long") {
+      maxProfit = "Unlimited";
+      maxLoss = premium;
+      breakeven = strikePrice + premium;
+    } else {
+      maxProfit = premium;
+      maxLoss = "Unlimited";
+      breakeven = strikePrice - premium;
+    }
+  } else { // Put
+    if (longShort === "long") {
+      maxProfit = strikePrice - premium;
+      maxLoss = premium;
+      breakeven = strikePrice - premium;
+    } else {
+      maxProfit = premium;
+      maxLoss = strikePrice - premium;
+      breakeven = strikePrice + premium;
+    }
+  }
+
+  return {
+    maxProfit,
+    maxLoss,
+    breakeven,
+  };
+};
