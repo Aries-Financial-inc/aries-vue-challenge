@@ -1,11 +1,34 @@
-function App() {
+import React, { useState } from "react";
+import Chart from "./components/Chart";
+import Table from "./components/Table";
+import OptionsForm from "./components/OptionsForm";
+import Layout from "./components/Layout";
+import { UNDERLYING_PRICES } from "../constants/index";
+import { AnalysisResult, OptionContract } from "../types/options";
+import { calculateProfitLoss } from "../utils/calculations";
+
+const App: React.FC = () => {
+  const [data, setData] = useState<AnalysisResult[]>([]);
+
+  const handleCalculate = (contracts: OptionContract[]) => {
+    const result = calculateProfitLoss(contracts, UNDERLYING_PRICES);
+    setData(result);
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-600">
-        Hello, Welcome to the project!
+    <Layout>
+      <h1 className="text-2xl font-bold mb-4">
+        Options Strategy Risk & Reward Analysis
       </h1>
-    </div>
+      <OptionsForm onCalculate={handleCalculate} />
+      {data.length > 0 && (
+        <>
+          <Chart data={data} />
+          <Table data={data} />
+        </>
+      )}
+    </Layout>
   );
-}
+};
 
 export default App;
