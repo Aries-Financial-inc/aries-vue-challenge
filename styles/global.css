@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body.dark {
+  @apply bg-gray-900 text-white;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.chart-container {
+  margin: 20px 0;
+}
+
+.table-auto {
+  margin: 20px 0;
+}
+
+.options-form {
+  margin-bottom: 20px;
+}
+
+.contract-inputs {
+  margin-bottom: 10px;
+}
