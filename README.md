@@ -2,6 +2,10 @@
 
 This project is a React application designed to analyze the risk and reward of options trading strategies. The application allows users to input up to four options contracts and outputs a risk & reward graph, along with key metrics such as max profit, max loss, and breakeven points.
 
+## Application Screenshot
+
+![Application Screenshot](./assets/web_app.png)
+
 ## Features
 
 - Input options contracts with details like type, strike price, bid, ask, and long/short.
