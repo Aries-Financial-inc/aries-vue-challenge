@@ -34,7 +34,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
               key={index}
               className={`${
                 index % 2 === 0
-                  ? "bg-white dark:bg-gray-800 "
+                  ? "bg-white dark:bg-gray-800"
                   : "bg-gray-50 dark:bg-gray-700"
               }`}
             >
