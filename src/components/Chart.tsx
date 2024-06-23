@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Label,
 } from "recharts";
 import { AnalysisResult, CombinedAnalysisResult } from "../../types/options";
 
@@ -36,13 +37,33 @@ const Chart: React.FC<ChartProps> = ({ data }) => {
           margin={{
             top: 10,
             right: 30,
-            left: 0,
-            bottom: 10,
+            left: 20,
+            bottom: 50,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="priceAtExpiry" />
-          <YAxis />
+          <XAxis dataKey="priceAtExpiry">
+            <Label
+              value="Price at Expiry"
+              offset={-50}
+              position="insideBottom"
+              fill="#8884d8"
+              style={{ fontSize: "18px", padding: "10px" }}
+            />
+          </XAxis>
+          <YAxis>
+            <Label
+              value="Profit/Loss"
+              angle={-90}
+              position="insideLeft"
+              fill="#8884d8"
+              style={{
+                textAnchor: "middle",
+                fontSize: "18px",
+                padding: "10px",
+              }}
+            />
+          </YAxis>
           <Tooltip />
           <Legend />
           {data.map((_, index) => (
