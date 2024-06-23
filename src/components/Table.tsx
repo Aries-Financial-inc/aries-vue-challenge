@@ -1,3 +1,4 @@
+import React from "react";
 import { AnalysisResult } from "../../types/options";
 
 interface TableProps {

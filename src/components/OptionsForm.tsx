@@ -1,18 +1,24 @@
-import React, { useState } from "react";
-import { OptionContract } from "../../types/options";
+import React, { useEffect, useState } from "react";
 import { DEFAULT_OPTION_CONTRACT } from "../../constants";
+import { OptionContract } from "../../types/options";
 
 interface OptionsFormProps {
+  contracts: OptionContract[];
   onCalculate: (contracts: OptionContract[]) => void;
 }
 
-const OptionsForm: React.FC<OptionsFormProps> = ({ onCalculate }) => {
-  const [contracts, setContracts] = useState<OptionContract[]>([
-    DEFAULT_OPTION_CONTRACT,
-  ]);
+const OptionsForm: React.FC<OptionsFormProps> = ({
+  contracts,
+  onCalculate,
+}) => {
+  const [localContracts, setLocalContracts] = useState<OptionContract[]>([]);
+
+  useEffect(() => {
+    setLocalContracts(contracts);
+  }, [contracts]);
 
   const addContract = () => {
-    setContracts([...contracts, { ...DEFAULT_OPTION_CONTRACT }]);
+    setLocalContracts([...localContracts, { ...DEFAULT_OPTION_CONTRACT }]);
   };
 
   const handleInputChange = (
@@ -20,19 +26,19 @@ const OptionsForm: React.FC<OptionsFormProps> = ({ onCalculate }) => {
     field: keyof OptionContract,
     value: string | number
   ) => {
-    const updatedContracts = contracts.map((contract, i) =>
+    const updatedContracts = localContracts.map((contract, i) =>
       i === index ? { ...contract, [field]: value } : contract
     );
-    setContracts(updatedContracts);
+    setLocalContracts(updatedContracts);
   };
 
   const handleSubmit = () => {
-    onCalculate(contracts);
+    onCalculate(localContracts);
   };
 
   return (
     <div className="options-form mb-4">
-      {contracts.map((contract, index) => (
+      {localContracts.map((contract, index) => (
         <div key={index} className="flex space-x-2 mb-2">
           <select
             value={contract.type}
