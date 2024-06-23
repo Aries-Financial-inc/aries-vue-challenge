@@ -30,9 +30,6 @@ const App: React.FC = () => {
   return (
     <ThemeProvider>
       <Layout>
-        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800 dark:text-gray-200">
-          Options Strategy Risk & Reward Analysis
-        </h1>
         <OptionsForm contracts={contracts} onCalculate={handleCalculate} />
         {contracts.length === 0 && (
           <p className="text-center text-xl mt-10 text-gray-800 dark:text-gray-200">
