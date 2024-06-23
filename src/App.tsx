@@ -10,6 +10,7 @@ import Chart from "./components/Chart";
 import Layout from "./components/Layout";
 import OptionsForm from "./components/OptionsForm";
 import Table from "./components/Table";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const App: React.FC = () => {
   const [data, setData] = useState<AnalysisResult[][]>([]);
@@ -27,20 +28,19 @@ const App: React.FC = () => {
   };
 
   return (
-    <Layout>
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
-        Options Strategy Risk & Reward Analysis
-      </h1>
-      <OptionsForm contracts={contracts} onCalculate={handleCalculate} />
-      {data.length > 0 && (
-        <>
-          <Chart data={data} />
-          <div className="mt-8">
-            <Table data={details} />
-          </div>
-        </>
-      )}
-    </Layout>
+    <ThemeProvider>
+      <Layout>
+        <OptionsForm contracts={contracts} onCalculate={handleCalculate} />
+        {data.length > 0 && (
+          <>
+            <Chart data={data} />
+            <div className="mt-8">
+              <Table data={details} />
+            </div>
+          </>
+        )}
+      </Layout>
+    </ThemeProvider>
   );
 };
 

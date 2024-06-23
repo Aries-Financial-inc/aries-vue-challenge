@@ -49,29 +49,29 @@ const OptionsForm: React.FC<OptionsFormProps> = ({
 
   return (
     <div className="options-form mb-4">
-      <h2 className="text-center text-2xl font-bold mb-4 text-gray-800">
+      <h2 className="text-center text-lg font-bold mb-2 text-gray-800 dark:text-gray-200">
         Options Contract
       </h2>
       {localContracts.map((contract, index) => (
         <div
           key={index}
-          className="flex flex-wrap mb-4 p-4 border border-gray-200 rounded-lg bg-blue-50 shadow-sm"
+          className="flex flex-wrap mb-4 p-4 border border-gray-200 rounded-lg bg-blue-50 dark:bg-gray-700 shadow-sm"
         >
           <div className="w-full md:w-1/6 mb-2 md:mb-0 md:pr-2">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
               Type
             </label>
             <select
               value={contract.type}
               onChange={(e) => handleInputChange(index, "type", e.target.value)}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300"
             >
               <option value="call">Call</option>
               <option value="put">Put</option>
             </select>
           </div>
           <div className="w-full md:w-1/6 mb-2 md:mb-0 md:pr-2">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
               Strike Price
             </label>
             <input
@@ -80,12 +80,12 @@ const OptionsForm: React.FC<OptionsFormProps> = ({
               onChange={(e) =>
                 handleInputChange(index, "strikePrice", Number(e.target.value))
               }
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300"
               placeholder="Strike Price"
             />
           </div>
           <div className="w-full md:w-1/6 mb-2 md:mb-0 md:pr-2">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
               Bid
             </label>
             <input
@@ -94,12 +94,12 @@ const OptionsForm: React.FC<OptionsFormProps> = ({
               onChange={(e) =>
                 handleInputChange(index, "bid", Number(e.target.value))
               }
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300"
               placeholder="Bid"
             />
           </div>
           <div className="w-full md:w-1/6 mb-2 md:mb-0 md:pr-2">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
               Ask
             </label>
             <input
@@ -108,12 +108,12 @@ const OptionsForm: React.FC<OptionsFormProps> = ({
               onChange={(e) =>
                 handleInputChange(index, "ask", Number(e.target.value))
               }
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300"
               placeholder="Ask"
             />
           </div>
           <div className="w-full md:w-1/6 mb-2 md:mb-0 md:pr-2">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-gray-300">
               Long/Short
             </label>
             <select
@@ -121,7 +121,7 @@ const OptionsForm: React.FC<OptionsFormProps> = ({
               onChange={(e) =>
                 handleInputChange(index, "long_short", e.target.value)
               }
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300"
             >
               <option value="long">Long</option>
               <option value="short">Short</option>
