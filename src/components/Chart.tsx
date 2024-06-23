@@ -30,11 +30,14 @@ const Chart: React.FC<ChartProps> = ({ data }) => {
 
   return (
     <div className="chart-container">
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={500}>
         <LineChart
           data={combinedData}
           margin={{
+            top: 10,
             right: 30,
+            left: 0,
+            bottom: 10,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
