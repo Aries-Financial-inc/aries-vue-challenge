@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ThemeProvider } from "./context/ThemeContext";
+import { ThemeProvider } from "../context/ThemeContext";
 import { UNDERLYING_PRICES } from "../constants";
 import {
   AnalysisResult,
