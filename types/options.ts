@@ -3,6 +3,9 @@ export interface OptionContract {
   strikePrice: number;
   premium: number;
   quantity: number;
+  bid: number; // Bid price
+  ask: number; // Ask price
+  long_short: "long" | "short"; // Long or short
 }
 
 export interface AnalysisResult {

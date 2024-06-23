@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { DEFAULT_OPTION_CONTRACT } from "../../constants";
+import React, { useState, useEffect } from "react";
 import { OptionContract } from "../../types/options";
+import { DEFAULT_OPTION_CONTRACT } from "../../constants";
+import { isOptionFilled } from "../../utils/riskRewardOptions";
 
 interface OptionsFormProps {
   contracts: OptionContract[];
@@ -39,7 +40,11 @@ const OptionsForm: React.FC<OptionsFormProps> = ({
   };
 
   const handleSubmit = () => {
-    onCalculate(localContracts);
+    if (localContracts.every(isOptionFilled)) {
+      onCalculate(localContracts);
+    } else {
+      alert("Please fill in all fields for all options.");
+    }
   };
 
   return (
@@ -52,7 +57,7 @@ const OptionsForm: React.FC<OptionsFormProps> = ({
           key={index}
           className="flex flex-wrap mb-4 p-4 border border-gray-200 rounded-lg bg-blue-50 shadow-sm"
         >
-          <div className="w-full md:w-1/5 mb-2 md:mb-0 md:pr-2">
+          <div className="w-full md:w-1/6 mb-2 md:mb-0 md:pr-2">
             <label className="block text-sm font-medium text-gray-600">
               Type
             </label>
@@ -65,7 +70,7 @@ const OptionsForm: React.FC<OptionsFormProps> = ({
               <option value="put">Put</option>
             </select>
           </div>
-          <div className="w-full md:w-1/5 mb-2 md:mb-0 md:pr-2">
+          <div className="w-full md:w-1/6 mb-2 md:mb-0 md:pr-2">
             <label className="block text-sm font-medium text-gray-600">
               Strike Price
             </label>
@@ -79,35 +84,50 @@ const OptionsForm: React.FC<OptionsFormProps> = ({
               placeholder="Strike Price"
             />
           </div>
-          <div className="w-full md:w-1/5 mb-2 md:mb-0 md:pr-2">
+          <div className="w-full md:w-1/6 mb-2 md:mb-0 md:pr-2">
             <label className="block text-sm font-medium text-gray-600">
-              Premium
+              Bid
             </label>
             <input
               type="number"
-              value={contract.premium}
+              value={contract.bid}
               onChange={(e) =>
-                handleInputChange(index, "premium", Number(e.target.value))
+                handleInputChange(index, "bid", Number(e.target.value))
               }
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Premium"
+              placeholder="Bid"
             />
           </div>
-          <div className="w-full md:w-1/5 mb-2 md:mb-0 md:pr-2">
+          <div className="w-full md:w-1/6 mb-2 md:mb-0 md:pr-2">
             <label className="block text-sm font-medium text-gray-600">
-              Quantity
+              Ask
             </label>
             <input
               type="number"
-              value={contract.quantity}
+              value={contract.ask}
               onChange={(e) =>
-                handleInputChange(index, "quantity", Number(e.target.value))
+                handleInputChange(index, "ask", Number(e.target.value))
               }
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Quantity"
+              placeholder="Ask"
             />
           </div>
-          <div className="w-full md:w-1/5 flex items-end mb-2 md:mb-0">
+          <div className="w-full md:w-1/6 mb-2 md:mb-0 md:pr-2">
+            <label className="block text-sm font-medium text-gray-600">
+              Long/Short
+            </label>
+            <select
+              value={contract.long_short}
+              onChange={(e) =>
+                handleInputChange(index, "long_short", e.target.value)
+              }
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="long">Long</option>
+              <option value="short">Short</option>
+            </select>
+          </div>
+          <div className="w-full md:w-1/6 flex items-end mb-2 md:mb-0">
             <button
               type="button"
               onClick={() => handleRemoveContract(index)}
