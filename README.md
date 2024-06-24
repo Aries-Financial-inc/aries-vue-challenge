@@ -1,28 +1,63 @@
+Options Profit Calculator
+=========================
 
+This project is a Vue.js application for analyzing options strategies' risk and reward. It allows users to input options contracts and generates a graph showing profit and loss at different prices of the underlying asset at expiry.
 
-## Objective
+Table of Contents
+-----------------
 
-Design and implement a front-end for options strategy risk and reward analysis using Vue.
+-   [Features](#features)
+-   [Getting Started](#getting-started)
+    -   [Clone the Repository](#clone-the-repository)
+    -   [Install Packages](#install-packages)
+    -   [Run the Development Environment](#run-the-development-environment)
+    -   [Build for Production](#build-for-production)
+-   [Usage](#usage)
 
-## Brief
+Features
+--------
 
-Your challenge is to create a Vue component that can generate a risk & reward graph for options strategies. The component should accept an input of up to four options contracts and output the following:
-1. A risk & reward graph where X is the price of the underlying at the time of expiry and Y is the profit/loss at that price. 
-2. Max profit, max loss, and all break even points.
+-   Input up to four options contracts
+-   Generates a risk & reward graph
+-   Displays maximum profit, maximum loss, and break-even points
 
-### Evaluation Criteria
+Getting Started
+---------------
 
-- Completeness of the logic
-- Usability of the graph
-- Aesthetics of the UI
-- Readability and code structure
+### Clone the Repository
 
-### CodeSubmit 
+To clone the repository, run the following command in your terminal:
 
-Please organize, design, test, and document your code as if it were
-going into production - then push your changes to the main branch.
+`git clone https://github.com/Aries-Financial-inc/aries-vue-challenge && cd options-profit-calculator`
 
-Reply to the invitation e-mail with your github username to notify of completion.
+### Install Packages
 
-Have fun coding! 🚀
-The Aries Financial Team
+Make sure you have [Node.js](https://nodejs.org/) installed. Then, install the required packages using npm:
+
+`npm install`
+
+### Run the Development Environment
+
+To start the development server, run:
+
+`npm run serve`
+
+This will start the app and you can view it in your browser at `http://localhost:8080`.
+
+### Build for Production
+
+To build the project for production, run:
+
+`npm run build`
+
+The production-ready files will be generated in the `dist` directory.
+
+Usage
+-----
+
+Once you have the development server running, you can use the application as follows:
+
+1.  Enter the details for each options contract (type, strike price, and premium).
+2.  Click the "Add Contract" button to add up to four contracts.
+3.  Click the "Generate Graph" button to generate the risk & reward graph.
+4.  View the graph and the calculated results (maximum profit, maximum loss, and break-even points).

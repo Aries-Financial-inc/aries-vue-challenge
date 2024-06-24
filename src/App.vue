@@ -1,7 +1,9 @@
 <template>
-  <div id="app">
-    <CodingChallenge :optionsData="sampleData"/>
-  </div>
+  <v-app>
+    <v-main>
+      <CodingChallenge :optionsData="sampleData"/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
