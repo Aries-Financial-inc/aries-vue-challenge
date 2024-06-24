@@ -1,18 +1,22 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Risk & Reward Graph</h1>
-    <div>
-      <label for="contracts">Options Contracts (JSON):</label>
-      <textarea id="contracts" v-model="contractsInput" placeholder="Enter options contracts as JSON"></textarea>
+    <div class="input-container">
+      <label for="contracts">Options Contracts:</label>
+      <textarea
+        id="contracts"
+        v-model="contractsInput"
+        placeholder="Enter options contracts"
+      ></textarea>
       <button @click="calculateRiskReward">Calculate</button>
     </div>
-    <div>
+    <div class="chart-container">
       <canvas ref="riskRewardChart"></canvas>
     </div>
-    <div>
-      <p>Max Profit: {{ maxProfit }}</p>
-      <p>Max Loss: {{ maxLoss }}</p>
-      <p>All Break Even Points: {{ breakEvenPoints }}</p>
+    <div class="results-container">
+      <p><strong>Max Profit:</strong> {{ maxProfit }}</p>
+      <p><strong>Max Loss:</strong> {{ maxLoss }}</p>
+      <p><strong>All Break Even Points:</strong> {{ breakEvenPoints.join(', ') }}</p>
     </div>
   </div>
 </template>
@@ -34,14 +38,13 @@ export default {
   methods: {
     calculateRiskReward() {
       try {
-        JSON.parse(this.contractsInput);
         const { maxProfit, maxLoss, breakEvenPoints, chartData } = this.analyzeContracts();
         this.maxProfit = maxProfit;
         this.maxLoss = maxLoss;
         this.breakEvenPoints = breakEvenPoints;
         this.renderChart(chartData);
       } catch (error) {
-        alert('Invalid JSON input.');
+        alert('Invalid input.');
       }
     },
     analyzeContracts() {
@@ -97,9 +100,73 @@ export default {
 };
 </script>
 
-<style>
-#contracts {
-  width: 100%;
-  height: 100px;
+<style scoped>
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #4CAF50;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+textarea {
+  width: calc(100% - 42px);
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.chart-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.results-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.results-container p {
+  margin: 5px 0;
+  font-size: 16px;
 }
 </style>
