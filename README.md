@@ -1,28 +1,29 @@
+# Options Strategy Risk and Reward Analysis
+Overview
+This project is a Vue.js component that generates a risk and reward graph for options strategies. It accepts input for up to four options contracts in JSON format and outputs the following:
+It contains the completed Challenge and Risk and reward graph where the X-axis is the price of the underlying at the time of expiry and the Y-axis is the profit/loss at that price.
+Maximum profit, maximum loss, and all break-even points.
+
+# Installation
+1.Clone the repository
+
+2.Navigate to the project directory
 
 
-## Objective
+3.Install dependencies:
 
-Design and implement a front-end for options strategy risk and reward analysis using Vue.
 
-## Brief
+npm install
 
-Your challenge is to create a Vue component that can generate a risk & reward graph for options strategies. The component should accept an input of up to four options contracts and output the following:
-1. A risk & reward graph where X is the price of the underlying at the time of expiry and Y is the profit/loss at that price. 
-2. Max profit, max loss, and all break even points.
+4.Start the development server:
 
-### Evaluation Criteria
 
-- Completeness of the logic
-- Usability of the graph
-- Aesthetics of the UI
-- Readability and code structure
+npm run serve
+Open your browser and navigate to http://localhost:8080 to view the application.
 
-### CodeSubmit 
+# Dependencies
+Vue.js
+Chart.js
 
-Please organize, design, test, and document your code as if it were
-going into production - then push your changes to the main branch.
-
-Reply to the invitation e-mail with your github username to notify of completion.
-
-Have fun coding! 🚀
-The Aries Financial Team
+# License
+This project is licensed under the MIT License - see the LICENSE file for details.#
