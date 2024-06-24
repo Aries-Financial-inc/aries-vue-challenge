@@ -13,7 +13,9 @@
       <input v-model.number="option.bid" placeholder="Bid" />
       <input v-model.number="option.ask" placeholder="Ask" />
       <select v-model="option.position">
-        <option v-for="item in PositionType" :key="item" :value="item"></option>
+        <option v-for="item in PositionType" :key="item" :value="item">
+          {{ item }}
+        </option>
       </select>
     </div>
 
