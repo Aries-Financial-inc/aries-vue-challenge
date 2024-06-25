@@ -1,5 +1,11 @@
 import { Option, OptionType, PositionType } from '@/models/Option'
 
+/**
+ * Calculate profit or loss at a given price
+ * @param option
+ * @param price
+ * @returns profit or loss
+ */
 export const calculateProfitLossAtPrice = (option: Option, price: number) => {
   const isCall = option.type === OptionType.Call
   const isLong = option.position === PositionType.Long
@@ -18,6 +24,12 @@ export const calculateProfitLossAtPrice = (option: Option, price: number) => {
   return profitLoss
 }
 
+/**
+ * Calculate total profit or loss for a strategy at a given price
+ * @param options
+ * @param price
+ * @returns total profit or loss
+ */
 export const calculateStrategyProfitLoss = (
   options: Option[],
   price: number
@@ -28,6 +40,11 @@ export const calculateStrategyProfitLoss = (
   )
 }
 
+/**
+ * Get break even points for a strategy
+ * @param options
+ * @returns break even points
+ */
 export const getBreakEvenPoints = (options: Option[]) => {
   // Basic logic to determine break even points
   // This is simplified and should be expanded for accuracy
@@ -47,6 +64,11 @@ export const getBreakEvenPoints = (options: Option[]) => {
     .sort((a, b) => a - b)
 }
 
+/**
+ * Get max profit for a strategy
+ * @param options
+ * @returns max profit
+ */
 export const getMaxProfit = (options: Option[]) => {
   // Simplified logic for max profit
   // Should be expanded based on specific strategies
@@ -64,6 +86,11 @@ export const getMaxProfit = (options: Option[]) => {
   }, 0)
 }
 
+/**
+ * Get max loss for a strategy
+ * @param options
+ * @returns max loss
+ */
 export const getMaxLoss = (options: Option[]) => {
   // Simplified logic for max loss
   // Should be expanded based on specific strategies
@@ -81,6 +108,11 @@ export const getMaxLoss = (options: Option[]) => {
   }, 0)
 }
 
+/**
+ * Calculate median strike price for a strategy
+ * @param options
+ * @returns max loss
+ */
 export const calculateMedianStrikePrice = (options: Option[]) => {
   const strikePrices = options.map((option) => option.strike_price)
   strikePrices.sort((a, b) => a - b)
@@ -89,12 +121,17 @@ export const calculateMedianStrikePrice = (options: Option[]) => {
   return strikePrices[middleIndex]
 }
 
+/**
+ * Generate chart data for a strategy
+ * @param options
+ * @returns chart data with prices for x-axis and profits for y-axis
+ */
 export const generateChartData = (options: Option[]) => {
   const prices = []
   const profits = []
 
   const CHART_PRICE_RANGE = 0.5 // 50% above and below median strike price
-  const CHART_STEP_COUNT = 10 // Number of steps to calculate
+  const CHART_STEP_COUNT = 10 // Number of steps to display on chart
 
   const strikePriceMedian = calculateMedianStrikePrice(options)
   const startPrice = Math.round(strikePriceMedian * CHART_PRICE_RANGE)
