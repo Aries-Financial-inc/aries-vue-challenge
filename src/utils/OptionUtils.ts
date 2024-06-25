@@ -31,18 +31,20 @@ export const calculateStrategyProfitLoss = (
 export const getBreakEvenPoints = (options: Option[]) => {
   // Basic logic to determine break even points
   // This is simplified and should be expanded for accuracy
-  return options.map((option) => {
-    const optionPrice = (option.bid + option.ask) / 2
-    if (option.type === OptionType.Call) {
-      return option.position === PositionType.Long
-        ? option.strike_price + optionPrice
-        : option.strike_price - optionPrice
-    } else {
-      return option.position === PositionType.Long
-        ? option.strike_price - optionPrice
-        : option.strike_price + optionPrice
-    }
-  })
+  return options
+    .map((option) => {
+      const optionPrice = (option.bid + option.ask) / 2
+      if (option.type === OptionType.Call) {
+        return option.position === PositionType.Long
+          ? option.strike_price + optionPrice
+          : option.strike_price - optionPrice
+      } else {
+        return option.position === PositionType.Long
+          ? option.strike_price - optionPrice
+          : option.strike_price + optionPrice
+      }
+    })
+    .sort((a, b) => a - b)
 }
 
 export const getMaxProfit = (options: Option[]) => {

@@ -1,19 +1,22 @@
 <template>
-  <LineChartJS :chartOptions="chartOptions" :chartData="chartData" />
+  <div :class="$style.Root">
+    <LineChartJS :chartData="chartData" :chartOptions="chartOptions" />
+  </div>
 </template>
 
 <script lang="ts">
-import { Line as LineChartJS } from 'vue-chartjs/legacy'
+import Vue from 'vue'
 
-export const CHART_COLORS = {
-  red: 'rgb(255, 99, 132)',
-  orange: 'rgb(255, 159, 64)',
-  yellow: 'rgb(255, 205, 86)',
-  green: 'rgb(75, 192, 192)',
-  blue: 'rgb(54, 162, 235)',
-  purple: 'rgb(153, 102, 255)',
-  grey: 'rgb(201, 203, 207)'
-}
+/* import models */
+import { Option } from '@/models/Option'
+
+/* import utils */
+import { generateChartData } from '@/utils/OptionUtils'
+import { formatPrice } from '@/utils/FormatUtils'
+import { CHART_COLORS } from '@/utils/ChartUtils'
+
+/* import components */
+import { Line as LineChartJS } from 'vue-chartjs/legacy'
 
 import {
   Chart as ChartJS,
@@ -38,36 +41,30 @@ ChartJS.register(
   PointElement
 )
 
-export default {
-  name: 'LineChart',
-
+export default Vue.extend({
   components: {
     LineChartJS
   },
 
   props: {
-    labels: {
-      type: Array as () => number[],
-      required: true
-    },
-    data: {
-      type: Array as () => number[],
+    optionsData: {
+      type: Array as () => Option[],
       required: true
     }
   },
 
   computed: {
     chartData(): ChartData {
+      const { prices, profits } = generateChartData(this.optionsData)
+
       return {
-        // @ts-ignore:next-line
-        labels: [...this.labels],
+        labels: [...prices],
         datasets: [
           {
-            label: 'Profit/Loss',
-            borderColor: CHART_COLORS.green,
+            label: 'Profit / Loss',
             backgroundColor: CHART_COLORS.blue,
-            // @ts-ignore:next-line
-            data: [...this.data],
+            borderColor: CHART_COLORS.blue,
+            data: [...profits],
             segment: {
               borderColor: (ctx) => {
                 const price = ctx.p1.parsed.y
@@ -75,9 +72,11 @@ export default {
                   return CHART_COLORS.red
                 }
               },
+
               backgroundColor: (ctx) => {
-                const price = ctx.p1.parsed.y
+                const price = ctx.p0.parsed.y
                 if (price <= 0) {
+                  console.log('red', price)
                   return CHART_COLORS.red
                 }
               }
@@ -92,24 +91,39 @@ export default {
       return {
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
         scales: {
           x: {
-            display: true,
             title: {
               display: true,
               text: 'Price of Underlying at Expiry'
             }
           },
           y: {
-            display: true,
             title: {
               display: true,
-              text: 'Profit/Loss'
+              text: 'Profit / Loss'
+            },
+            ticks: {
+              callback: (value) => {
+                return formatPrice(value)
+              }
             }
           }
         }
       }
     }
   }
-}
+})
 </script>
+
+<style module>
+.Root {
+  width: 100%;
+  height: 400px;
+}
+</style>
