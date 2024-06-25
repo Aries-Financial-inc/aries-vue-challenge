@@ -78,3 +78,31 @@ export const getMaxLoss = (options: Option[]) => {
     return Math.min(maxLoss, loss)
   }, 0)
 }
+
+export const calculateMedianStrikePrice = (options: Option[]) => {
+  const strikePrices = options.map((option) => option.strike_price)
+  strikePrices.sort((a, b) => a - b)
+
+  const middleIndex = Math.floor(strikePrices.length / 2)
+  return strikePrices[middleIndex]
+}
+
+export const generateChartData = (options: Option[]) => {
+  const prices = []
+  const profits = []
+
+  const CHART_PRICE_RANGE = 0.5 // 50% above and below median strike price
+  const CHART_STEP_COUNT = 10 // Number of steps to calculate
+
+  const strikePriceMedian = calculateMedianStrikePrice(options)
+  const startPrice = Math.round(strikePriceMedian * CHART_PRICE_RANGE)
+  const endPrice = Math.round(strikePriceMedian + startPrice)
+  const step = Math.round((endPrice - startPrice) / CHART_STEP_COUNT)
+
+  for (let i = startPrice; i <= endPrice; i += step) {
+    prices.push(i)
+    profits.push(calculateStrategyProfitLoss(options, i))
+  }
+
+  return { prices, profits }
+}

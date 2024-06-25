@@ -5,6 +5,16 @@
 <script lang="ts">
 import { Line as LineChartJS } from 'vue-chartjs/legacy'
 
+export const CHART_COLORS = {
+  red: 'rgb(255, 99, 132)',
+  orange: 'rgb(255, 159, 64)',
+  yellow: 'rgb(255, 205, 86)',
+  green: 'rgb(75, 192, 192)',
+  blue: 'rgb(54, 162, 235)',
+  purple: 'rgb(153, 102, 255)',
+  grey: 'rgb(201, 203, 207)'
+}
+
 import {
   Chart as ChartJS,
   Title,
@@ -13,7 +23,9 @@ import {
   LineElement,
   LinearScale,
   CategoryScale,
-  PointElement
+  PointElement,
+  ChartData,
+  ChartOptions
 } from 'chart.js'
 
 ChartJS.register(
@@ -45,40 +57,56 @@ export default {
   },
 
   computed: {
-    chartData() {
+    chartData(): ChartData {
       return {
+        // @ts-ignore:next-line
         labels: [...this.labels],
         datasets: [
           {
             label: 'Profit/Loss',
-            backgroundColor: '#f87979',
-            data: [...this.data]
+            borderColor: CHART_COLORS.green,
+            backgroundColor: CHART_COLORS.blue,
+            // @ts-ignore:next-line
+            data: [...this.data],
+            segment: {
+              borderColor: (ctx) => {
+                const price = ctx.p1.parsed.y
+                if (price <= 0) {
+                  return CHART_COLORS.red
+                }
+              },
+              backgroundColor: (ctx) => {
+                const price = ctx.p1.parsed.y
+                if (price <= 0) {
+                  return CHART_COLORS.red
+                }
+              }
+            },
+            spanGaps: true
           }
         ]
       }
     },
 
-    chartOptions() {
+    chartOptions(): ChartOptions {
       return {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-          xAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: 'Price of Underlying at Expiry'
-              }
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Price of Underlying at Expiry'
             }
-          ],
-          yAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: 'Profit/Loss'
-              }
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Profit/Loss'
             }
-          ]
+          }
         }
       }
     }
