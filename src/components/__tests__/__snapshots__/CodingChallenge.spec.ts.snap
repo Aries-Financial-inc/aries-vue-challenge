@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CodingChallenge renders correctly 1`] = `
+<div>
+  <h1>Options Profit Calculator</h1>
+  <profitlosschart-stub optionsdata="[object Object],[object Object],[object Object],[object Object]" chartid="line-chart" datasetidkey="label" width="400" height="400" cssclasses="" plugins="" class="Chart"></profitlosschart-stub>
+  <profitlosssummary-stub optionsdata="[object Object],[object Object],[object Object],[object Object]" class="Summary"></profitlosssummary-stub>
+</div>
+`;
