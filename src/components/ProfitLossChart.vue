@@ -1,6 +1,16 @@
 <template>
   <div :class="$style.Root">
-    <LineChartJS :chartData="chartData" :chartOptions="chartOptions" />
+    <LineChartJS
+      :chartId="chartId"
+      :datasetIdKey="datasetIdKey"
+      :width="width"
+      :height="height"
+      :cssClasses="cssClasses"
+      :styles="styles"
+      :plugins="plugins"
+      :chartData="chartData"
+      :chartOptions="chartOptions"
+    />
   </div>
 </template>
 
@@ -50,6 +60,36 @@ export default Vue.extend({
     optionsData: {
       type: Array as () => Option[],
       required: true
+    },
+    chartId: {
+      type: String,
+      default: 'line-chart'
+    },
+    datasetIdKey: {
+      type: String,
+      default: 'label'
+    },
+    width: {
+      type: Number,
+      default: 400
+    },
+    height: {
+      type: Number,
+      default: 400
+    },
+    cssClasses: {
+      default: '',
+      type: String
+    },
+    styles: {
+      type: Object,
+      default: () => {
+        /* default styles */
+      }
+    },
+    plugins: {
+      type: Array,
+      default: () => []
     }
   },
 
