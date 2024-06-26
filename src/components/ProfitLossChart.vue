@@ -145,7 +145,7 @@ export default Vue.extend({
             },
             ticks: {
               callback: (value) => {
-                return formatPrice(value)
+                return formatPrice(Number(value), true) // strip decimals
               }
             }
           }
