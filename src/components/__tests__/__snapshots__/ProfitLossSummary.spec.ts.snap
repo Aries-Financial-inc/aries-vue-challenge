@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfitLossSummary renders correctly 1`] = `
+<div class="Root">
+  <p><label>Max Profit:</label> $89.45</p>
+  <p><label>Max Loss:</label> -$88.00</p>
+  <p><label>Break-even Points:</label> 88, 111.045, 115.55, 117.75</p>
+</div>
+`;

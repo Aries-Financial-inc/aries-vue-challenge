@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfitLossChart renders correctly 1`] = `
+<div class="Root">
+  <linechartjs-stub chartdata="[object Object]" chartoptions="[object Object]" datasetidkey="label" chartid="line-chart" width="400" height="400" cssclasses="" plugins=""></linechartjs-stub>
+</div>
+`;
