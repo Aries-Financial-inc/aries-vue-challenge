@@ -56,14 +56,16 @@ export default Vue.extend({
   computed: {
     chartData(): ChartData {
       const { prices, profits } = generateChartData(this.optionsData)
+      const profitColors = profits.map((profit) => {
+        return profit <= 0 ? CHART_COLORS.red : CHART_COLORS.blue
+      })
 
       return {
         labels: [...prices],
         datasets: [
           {
             label: 'Profit / Loss',
-            backgroundColor: CHART_COLORS.blue,
-            borderColor: CHART_COLORS.blue,
+            pointBackgroundColor: profitColors,
             data: [...profits],
             segment: {
               borderColor: (ctx) => {
@@ -71,14 +73,7 @@ export default Vue.extend({
                 if (price <= 0) {
                   return CHART_COLORS.red
                 }
-              },
-
-              backgroundColor: (ctx) => {
-                const price = ctx.p0.parsed.y
-                if (price <= 0) {
-                  console.log('red', price)
-                  return CHART_COLORS.red
-                }
+                return CHART_COLORS.blue
               }
             },
             spanGaps: true
